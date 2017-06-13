@@ -1,0 +1,174 @@
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@mipmap/ic_bg_main"
+    android:orientation="vertical" >
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_weight="1" >
+    </LinearLayout>
+
+    <LinearLayout
+        android:layout_width="250dp"
+        android:layout_height="250dp"
+        android:layout_gravity="center_horizontal"
+        android:background="@mipmap/ic_bg_exercises_main"
+        android:orientation="vertical">
+
+        <Button
+            android:id="@+id/btn_sxlx"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center_horizontal"
+            android:layout_marginTop="10dp"
+            android:background="#00000000"
+
+            android:drawableTop="@mipmap/ic_main_sxlx"
+            android:text="顺序练习"
+            android:textColor="#ffffff"
+            android:textSize="14sp" />
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center_horizontal"
+            android:layout_marginTop="28dp"
+            android:gravity="center_vertical"
+            android:orientation="horizontal">
+
+            <Button
+                android:id="@+id/btn_zjlx"
+                android:layout_width="60dp"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="5dp"
+                android:layout_marginRight="6dp"
+                android:background="#00000000"
+                android:drawableTop="@mipmap/ic_main_zjlx"
+                android:gravity="center"
+                android:text="章节练习"
+                android:textColor="#ffffff"
+                android:textSize="14sp" />
+
+            <LinearLayout
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="5dp"
+                android:layout_weight="0.87"
+                android:orientation="vertical">
+
+                <ImageView
+                    android:layout_width="match_parent"
+                    android:layout_height="40dp"
+                    android:layout_gravity="center_horizontal"
+                    android:src="@mipmap/ic_main_mnks" />
+
+                <Button
+                    android:id="@+id/btn_mnks"
+                    android:layout_width="match_parent"
+                    android:layout_height="20dp"
+                    android:background="#00000000"
+                    android:gravity="center"
+                    android:text="模拟考试"
+                    android:textColor="#000000"
+                    android:textSize="14sp" />
+            </LinearLayout>
+
+
+            <Button
+                android:id="@+id/btn_sjlx"
+                android:layout_width="60dp"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="2dp"
+                android:layout_marginTop="5dp"
+                android:background="#00000000"
+                android:drawableTop="@mipmap/ic_main_sjlx"
+                android:gravity="center"
+                android:text="随机练习"
+                android:textColor="#ffffffff"
+                android:textSize="14sp" />
+        </LinearLayout>
+
+        <Button
+            android:id="@+id/btn_ctjlb"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center_horizontal"
+            android:layout_marginTop="47dp"
+            android:background="#00000000"
+            android:drawableTop="@mipmap/ic_main_ctjlb"
+            android:text="错题记录本"
+            android:textColor="#ffffff"
+            android:textSize="14sp" />
+    </LinearLayout>
+
+    <LinearLayout
+        android:layout_width="fill_parent"
+        android:layout_height="70dp"
+        android:layout_marginLeft="25dp"
+        android:layout_marginRight="25dp"
+        android:layout_marginTop="10dp"
+        android:background="#F16C4D"
+        android:orientation="horizontal"
+        android:paddingTop="10dp" >
+
+        <Button
+            android:id="@+id/btn_point"
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_weight="1"
+            android:background="#00000000"
+            android:checked="true"
+            android:drawableTop="@drawable/icon_main_point"
+            android:gravity="center"
+            android:text="考试要点"
+            android:textColor="#ffffff"
+            android:textSize="14sp" />
+
+        <Button
+            android:id="@+id/btn_law"
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_weight="1"
+            android:background="#00000000"
+            android:drawableTop="@drawable/icon_main_law"
+            android:gravity="center"
+            android:text="法律法规"
+            android:textColor="#ffffff"
+            android:textSize="14sp" />
+
+        <Button
+            android:id="@+id/btn_cheats"
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_weight="1"
+            android:background="#00000000"
+            android:drawableTop="@drawable/icon_main_statistics"
+            android:gravity="center"
+            android:text="必过秘籍"
+            android:textColor="#ffffff"
+            android:textSize="14sp" />
+
+        <Button
+            android:id="@+id/btn_collection"
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_weight="1"
+            android:background="#00000000"
+            android:drawableTop="@drawable/icon_main_rank"
+            android:gravity="center"
+            android:text="收藏夹"
+            android:textColor="#ffffff"
+            android:textSize="14sp" />
+
+    </LinearLayout>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_weight="1" >
+    </LinearLayout>
+
+</LinearLayout>
