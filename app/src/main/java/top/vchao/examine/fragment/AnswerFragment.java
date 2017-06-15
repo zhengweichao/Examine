@@ -1,26 +1,30 @@
 package top.vchao.examine.fragment;
 
+import android.support.annotation.IdRes;
 import android.util.Log;
 import android.view.View;
 import android.widget.RadioButton;
+import android.widget.RadioGroup;
 import android.widget.TextView;
-
-import com.vchao.examine.R;
+import android.widget.Toast;
+import top.vchao.examine.R;
 
 import top.vchao.examine.bean.QuestBean;
-
+import top.vchao.examine.db.LoveDao;
 
 /**
  * @ 创建时间: 2017/6/11 on 16:25.
- * @ 描述：
+ * @ 描述： 答题fragment
  * @ 作者: 郑卫超 QQ: 2318723605
  */
 
-public class AnswerFragment extends BaseFragment {
+public class AnswerFragment extends BaseFragment implements RadioGroup.OnCheckedChangeListener {
     private RadioButton rb_option_a;
     private RadioButton rb_option_b;
     private RadioButton rb_option_c;
     private RadioButton rb_option_d;
+    private String option = "";
+    private RadioGroup rg_base;
     private TextView tv_title;
     QuestBean questBean = null;
 
@@ -36,7 +40,8 @@ public class AnswerFragment extends BaseFragment {
         rb_option_b = (RadioButton) view.findViewById(R.id._rb_option_b);
         rb_option_c = (RadioButton) view.findViewById(R.id._rb_option_c);
         rb_option_d = (RadioButton) view.findViewById(R.id._rb_option_d);
-
+        rg_base = (RadioGroup) view.findViewById(R.id._rg_base);
+        rg_base.setOnCheckedChangeListener(this);
         return view;
     }
 
@@ -56,6 +61,21 @@ public class AnswerFragment extends BaseFragment {
         rb_option_b.setText("" + questBean.getOptionB());
         rb_option_c.setText("" + questBean.getOptionC());
         rb_option_d.setText("" + questBean.getOptionD());
+    }
 
+    @Override
+    public void onCheckedChanged(RadioGroup group, @IdRes int checkedId) {
+        if (checkedId == rb_option_a.getId()) {
+            option = "A";
+        } else if (checkedId == rb_option_b.getId()) {
+            option = "B";
+        } else if (checkedId == rb_option_c.getId()) {
+            option = "C";
+        } else if (checkedId == rb_option_d.getId()) {
+            option = "D";
+        }
+        questBean.setMyanswer(option);
+//        Toast.makeText(mActivity, option+"==="+questBean.getAnswer(), Toast.LENGTH_SHORT).show();
+        LoveDao.updateLove(questBean);
     }
 }

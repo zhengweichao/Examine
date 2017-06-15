@@ -6,7 +6,7 @@ import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.View;
 
-import com.vchao.examine.R;
+import top.vchao.examine.R;
 
 /**
  * @ 创建时间: 2017/6/13 on 15:43.
@@ -27,7 +27,7 @@ public class SplashActivity extends BaseActivity {
             @Override
             public void run() {
                 //直接跳转主页面
-                Intent intent = new Intent(SplashActivity.this, MainActivity.class);
+                Intent intent = new Intent(SplashActivity.this, LoginActivity.class);
                 startActivity(intent);
                 finish();
             }

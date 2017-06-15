@@ -25,7 +25,6 @@
             android:layout_gravity="center_horizontal"
             android:layout_marginTop="10dp"
             android:background="#00000000"
-
             android:drawableTop="@mipmap/ic_main_sxlx"
             android:text="顺序练习"
             android:textColor="#ffffff"

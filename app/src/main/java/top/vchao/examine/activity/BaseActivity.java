@@ -79,6 +79,5 @@ public abstract class BaseActivity extends FragmentActivity implements View.OnCl
      */
     void processClick(View v) {
     }
-
     ;
 }

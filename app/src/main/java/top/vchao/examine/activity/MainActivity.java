@@ -4,18 +4,14 @@ import android.app.AlertDialog;
 import android.app.ProgressDialog;
 import android.content.Intent;
 import android.content.SharedPreferences;
-import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 
-import com.google.gson.Gson;
-import com.vchao.examine.R;
+import top.vchao.examine.R;
 
 import java.util.Random;
-
-import top.vchao.examine.bean.JsonQuestBean;
 
 public class MainActivity extends BaseActivity {
 
@@ -45,10 +41,6 @@ public class MainActivity extends BaseActivity {
 
     @Override
     void initView() {
-        Gson gson = new Gson();
-        JsonQuestBean JsonQuestBean = new JsonQuestBean();
-        String str = gson.toJson(JsonQuestBean);
-        Log.i("zwc", "initView: "+str);
 
         btnSxlx = (Button) findViewById(R.id.btn_sxlx);
         btnSjlx = (Button) findViewById(R.id.btn_sjlx);
@@ -60,15 +52,6 @@ public class MainActivity extends BaseActivity {
         btnCtjlb = (Button) findViewById(R.id.btn_ctjlb);
         btnPoint = (Button) findViewById(R.id.btn_point);
         btnCheats = (Button) findViewById(R.id.btn_cheats);
-        btnLaw.setOnClickListener(new MyOnClickListener());
-        btnSxlx.setOnClickListener(new MyOnClickListener());
-        btnSjlx.setOnClickListener(new MyOnClickListener());
-        btnZjlx.setOnClickListener(new MyOnClickListener());
-        btnMnks.setOnClickListener(new MyOnClickListener());
-        btnCollection.setOnClickListener(new MyOnClickListener());
-        btnCtjlb.setOnClickListener(new MyOnClickListener());
-        btnPoint.setOnClickListener(new MyOnClickListener());
-        btnCheats.setOnClickListener(new MyOnClickListener());
 
         Intent intent = getIntent();
         usernameFromLogin = intent.getStringExtra("usernameFromLogin");
@@ -80,64 +63,61 @@ public class MainActivity extends BaseActivity {
         }
     }
 
-    class MyOnClickListener implements android.view.View.OnClickListener {
+    @Override
+    void initListener() {
+        btnLaw.setOnClickListener(this);
+        btnSxlx.setOnClickListener(this);
+        btnSjlx.setOnClickListener(this);
+        btnZjlx.setOnClickListener(this);
+        btnMnks.setOnClickListener(this);
+        btnCollection.setOnClickListener(this);
+        btnCtjlb.setOnClickListener(this);
+        btnPoint.setOnClickListener(this);
+        btnCheats.setOnClickListener(this);
+    }
 
-        @Override
-        public void onClick(View v) {
+    @Override
+    void processClick(View v) {
+        switch (v.getId()) {
+            case R.id.btn_sxlx:
+                // TODO: 2017/6/13 顺序练习
+                Intent intent1 = new Intent(MainActivity.this, AnswerActivity.class);
+                startActivity(intent1);
+                break;
+            case R.id.btn_sjlx:
+                // TODO: 2017/6/13 随机练习
+                break;
 
-            switch (v.getId()) {
+            case R.id.btn_zjlx:
+                // TODO: 2017/6/13 章节练习
+                break;
 
-                case R.id.btn_sxlx:
-                    Intent intent_sxlx = new Intent(MainActivity.this,
-                            AnswerActivity.class);
-                    startActivity(intent_sxlx);
-                    break;
+            case R.id.btn_mnks:
+                // TODO: 2017/6/13 模拟考试
+                break;
 
-                case R.id.btn_sjlx:
-                    Intent intent_sjlx = new Intent(MainActivity.this,
-                            MainActivity.class);
-                    startActivity(intent_sjlx);
-                    break;
+            case R.id.btn_ctjlb:
+                // TODO: 2017/6/13 错题记录本
+                break;
 
-                case R.id.btn_zjlx:
-                    Intent intent_zjlx = new Intent(MainActivity.this,
-                            MainActivity.class);
-                    startActivity(intent_zjlx);
-                    break;
+            case R.id.btn_point:
+                // TODO: 2017/6/13 考试要点
+                break;
 
-                case R.id.btn_mnks:
+            case R.id.btn_law:
+                // TODO: 2017/6/13 法律法规
+                break;
 
+            case R.id.btn_cheats:
+                // TODO: 2017/6/13 必过秘籍
+                break;
 
-                    break;
+            case R.id.btn_collection:
+                // TODO: 2017/6/13 收藏夹
+                break;
 
-                case R.id.btn_ctjlb:
-                    Intent intent_ctjlb = new Intent(MainActivity.this, MainActivity.class);
-                    startActivity(intent_ctjlb);
-                    break;
-
-                case R.id.btn_point:
-                    Intent intent_point = new Intent(MainActivity.this, MainActivity.class);
-                    startActivity(intent_point);
-                    break;
-
-                case R.id.btn_law:
-                    Intent intent_law = new Intent(MainActivity.this, MainActivity.class);
-                    startActivity(intent_law);
-                    break;
-
-                case R.id.btn_cheats:
-                    Intent intent_cheats = new Intent(MainActivity.this, MainActivity.class);
-                    startActivity(intent_cheats);
-                    break;
-
-                case R.id.btn_collection:
-                    Intent intent_collection = new Intent(MainActivity.this, MainActivity.class);
-                    startActivity(intent_collection);
-                    break;
-
-                default:
-                    break;
-            }
+            default:
+                break;
         }
     }
 

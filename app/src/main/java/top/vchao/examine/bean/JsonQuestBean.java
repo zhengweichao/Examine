@@ -1,36 +1,39 @@
 package top.vchao.examine.bean;
 
-
-import java.util.ArrayList;
 import java.util.List;
 
 /**
- * @ 创建时间: 2017/6/13 on 17:13.
+ * @ 创建时间: 2017/6/15 on 0:51.
  * @ 描述：
  * @ 作者: 郑卫超 QQ: 2318723605
  */
 
 public class JsonQuestBean {
 
-    private int age = 81;
-    private String name = "aaaaa";
+    /**
+     * status : ok
+     * code : 200
+     * messages : [{"id":1,"q_type":1,"title":"title","optionA":"选项A","optionB":"选项B","optionC":"选项C","optionD":"选项D","answer":"answer","tips":"tips","explain":"explain"},{"id":2,"q_type":1,"title":"title","optionA":"选项A","optionB":"选项B","optionC":"选项C","optionD":"选项D","answer":"answer","tips":"tips","explain":"explain"},{"id":3,"q_type":1,"title":"1","optionA":"title","optionB":"选项A","optionC":"选项B","optionD":"选项C","answer":"tips","tips":"选项D","explain":"answer"},{"id":4,"q_type":1,"title":"title","optionA":"选项A","optionB":"选项B","optionC":"选项C","optionD":"选项D","answer":"answer","tips":"tips","explain":"explain"},{"id":5,"q_type":1,"title":"title","optionA":"选项A","optionB":"选项B","optionC":"选项C","optionD":"选项D","answer":"answer","tips":"tips","explain":"explain"}]
+     */
+
+    private String status;
+    private String code;
     private List<QuestBean> messages;
 
-
-    public int getAge() {
-        return age;
+    public String getStatus() {
+        return status;
     }
 
-    public void setAge(int age) {
-        this.age = age;
+    public void setStatus(String status) {
+        this.status = status;
     }
 
-    public String getName() {
-        return name;
+    public String getCode() {
+        return code;
     }
 
-    public void setName(String name) {
-        this.name = name;
+    public void setCode(String code) {
+        this.code = code;
     }
 
     public List<QuestBean> getMessages() {
@@ -41,17 +44,5 @@ public class JsonQuestBean {
         this.messages = messages;
     }
 
-    public JsonQuestBean() {
-        this.messages = new ArrayList<QuestBean>() {
-            {
-                QuestBean qu0 = new QuestBean(7,0,"a33","8w8a","a","c","d","a8");
-                QuestBean qu1 = new QuestBean(47,0,"a45","8fc8a","a","k","88","aa");
-                QuestBean qu2 = new QuestBean(87,0,"a33","88va","87","c","d","aa");
 
-                add(qu0);
-                add(qu1);
-                add(qu2);
-            }
-        };
-    }
 }
