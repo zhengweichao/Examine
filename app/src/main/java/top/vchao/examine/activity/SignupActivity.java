@@ -15,6 +15,7 @@ import com.lzy.okgo.callback.StringCallback;
 
 import okhttp3.Call;
 import okhttp3.Response;
+import top.vchao.examine.CONFIG;
 import top.vchao.examine.R;
 import top.vchao.examine.bean.JsonLoginBean;
 import top.vchao.examine.bean.JsonSignupBean;
@@ -40,6 +41,7 @@ public class SignupActivity extends BaseActivity {
 
     @Override
     void initView() {
+        //根据id找控件
         _nameText = (EditText) findViewById(R.id.input_name);
         _emailText = (EditText) findViewById(R.id.input_username);
         _passwordText = (EditText) findViewById(R.id.input_password);
@@ -83,34 +85,22 @@ public class SignupActivity extends BaseActivity {
         progressDialog.setMessage("创建账号...");
         progressDialog.show();
         //获取数据
-        String name = _nameText.getText().toString();
+        String username = _nameText.getText().toString();
         String password = _passwordText.getText().toString();
-        String reEnterPassword = _reEnterPasswordText.getText().toString();
-
-//        // TODO: Implement your own signup logic here.
-//        new android.os.Handler().postDelayed(
-//                new Runnable() {
-//                    public void run() {
-//                        // depending on success
-//                        // TODO: 2017/5/22 注册成功
-//                        onSignupSuccess();
-//                        // onSignupFailed();
-//                        progressDialog.dismiss();
-//                    }
-//                }, 3000);
-
-        OkGo.get("http://192.168.1.116:8080/Examine1/RegLet")
-                .params("username",name)
+//      联网获取数据
+        OkGo.get(CONFIG.URL_SIGNUP)
+                .params("username",username)
                 .params("password",password)
                 .execute(new StringCallback() {
                     @Override
                     public void onSuccess(String s, Call call, Response response) {
                         Gson gson = new Gson();
                         JsonSignupBean jsonSignupBean = gson.fromJson(s, JsonSignupBean.class);
-                        //如果得到权限>0,则登录成功。
+                        //如果得到返回消息为ok,则注册成功。
                         if (jsonSignupBean.getMsg().equals("ok")){
-                            Log.e("zwc", "onSuccess: ===" );
+                            Log.e("zwc", "onSuccess: 注册成功" );
                             onSignupSuccess();
+                            //对话框消失
                             progressDialog.dismiss();
                         }else{
                             onSignupFailed(1);
@@ -120,9 +110,11 @@ public class SignupActivity extends BaseActivity {
                 });
     }
 
+    /**
+     * 登陆成功
+     */
     public void onSignupSuccess() {
         _signupButton.setEnabled(true);
-//        setResult(RESULT_OK, null);
 
         Intent intent = new Intent(SignupActivity.this, MainActivity.class);
         startActivity(intent);
@@ -131,6 +123,7 @@ public class SignupActivity extends BaseActivity {
 
     /**
      * 注册失败，按钮置为可用
+     * 依据传参不同，进行不同吐司
      */
     public void onSignupFailed(int i) {
         if(i==1){
@@ -141,27 +134,31 @@ public class SignupActivity extends BaseActivity {
         _signupButton.setEnabled(true);
     }
 
+    /**
+     *
+     * @return 输入内容是否合法
+     */
     public boolean validate() {
         boolean valid = true;
-
+//      从控件中获取数据
         String name = _nameText.getText().toString();
         String password = _passwordText.getText().toString();
         String reEnterPassword = _reEnterPasswordText.getText().toString();
-
+        //检测账号是否正确
         if (name.isEmpty()) {
             _nameText.setError("账号不能为空");
             valid = false;
         } else {
             _nameText.setError(null);
         }
-
+        //检测密码是否正确
         if (password.isEmpty()) {
             _passwordText.setError("请输入密码");
             valid = false;
         } else {
             _passwordText.setError(null);
         }
-
+        //检测重复密码是否正确
         if (reEnterPassword.isEmpty() || !(reEnterPassword.equals(password))) {
             _reEnterPasswordText.setError("两次密码不一致");
             valid = false;

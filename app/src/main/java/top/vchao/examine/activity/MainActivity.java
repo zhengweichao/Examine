@@ -15,24 +15,15 @@ import java.util.Random;
 
 public class MainActivity extends BaseActivity {
 
-    private AlertDialog.Builder exitDialog;
-    private AlertDialog.Builder mobileDialog;
     private Button btnSxlx;
     private Button btnSjlx;
     private Button btnZjlx;
     private Button btnLaw;
     private Button btnMnks;
-    private ProgressDialog pd;
-    private Random random = new Random();
-    private SharedPreferences.Editor editor;
     private Button btnCollection;
     private Button btnCtjlb;
     private Button btnPoint;
     private Button btnCheats;
-    private TextView tvUsername;
-    private String usernameFromLogin;
-    private String usernameFromRegister;
-    private LinearLayout llCircleOfFriends;
 
     @Override
     int getLayoutId() {
@@ -41,37 +32,32 @@ public class MainActivity extends BaseActivity {
 
     @Override
     void initView() {
+//      找控件
 
+        /*该部分留作扩展
         btnSxlx = (Button) findViewById(R.id.btn_sxlx);
         btnSjlx = (Button) findViewById(R.id.btn_sjlx);
-        btnZjlx = (Button) findViewById(R.id.btn_zjlx);
+        btnCtjlb = (Button) findViewById(R.id.btn_ctjlb);
+        btnZjlx = (Button) findViewById(R.id.btn_zjlx);*/
         btnMnks = (Button) findViewById(R.id.btn_mnks);
         btnLaw = (Button) findViewById(R.id.btn_law);
         btnCollection = (Button) findViewById(R.id.btn_collection);
-
-        btnCtjlb = (Button) findViewById(R.id.btn_ctjlb);
         btnPoint = (Button) findViewById(R.id.btn_point);
         btnCheats = (Button) findViewById(R.id.btn_cheats);
 
-        Intent intent = getIntent();
-        usernameFromLogin = intent.getStringExtra("usernameFromLogin");
-        usernameFromRegister = intent.getStringExtra("usernameFromRegister");
-        if (usernameFromLogin != null) {
-            tvUsername.setText(usernameFromLogin);
-        } else if (usernameFromRegister != null) {
-            tvUsername.setText(usernameFromRegister);
-        }
     }
 
     @Override
     void initListener() {
         btnLaw.setOnClickListener(this);
+        /*该部分留作扩展
         btnSxlx.setOnClickListener(this);
         btnSjlx.setOnClickListener(this);
+        btnCtjlb.setOnClickListener(this);
         btnZjlx.setOnClickListener(this);
+        */
         btnMnks.setOnClickListener(this);
         btnCollection.setOnClickListener(this);
-        btnCtjlb.setOnClickListener(this);
         btnPoint.setOnClickListener(this);
         btnCheats.setOnClickListener(this);
     }
@@ -79,41 +65,57 @@ public class MainActivity extends BaseActivity {
     @Override
     void processClick(View v) {
         switch (v.getId()) {
-            case R.id.btn_sxlx:
-                // TODO: 2017/6/13 顺序练习
+//            点击开始答题，则带参传递，跳转页面，默认选择题
+            case R.id.btn_mnks:
+                // TODO: 2017/6/13 开始答题
                 Intent intent1 = new Intent(MainActivity.this, AnswerActivity.class);
+                intent1.putExtra("type",1);
                 startActivity(intent1);
                 break;
+
+//            该部分留作以后扩展增加功能使用
+            /*case R.id.btn_sxlx:
+                //  2017/6/13 顺序练习
+
+                break;
             case R.id.btn_sjlx:
-                // TODO: 2017/6/13 随机练习
+                //  2017/6/13 随机练习
+                Intent intent2 = new Intent(MainActivity.this, AnswerActivity.class);
+                intent2.putExtra("type",2);
+                startActivity(intent2);
                 break;
-
             case R.id.btn_zjlx:
-                // TODO: 2017/6/13 章节练习
+                //  2017/6/13 章节练习
                 break;
-
-            case R.id.btn_mnks:
-                // TODO: 2017/6/13 模拟考试
-                break;
-
             case R.id.btn_ctjlb:
-                // TODO: 2017/6/13 错题记录本
-                break;
+
+                break;*/
 
             case R.id.btn_point:
-                // TODO: 2017/6/13 考试要点
+                // TODO: 2017/6/13 选择题
+                Intent intent3 = new Intent(MainActivity.this, AnswerActivity.class);
+                intent3.putExtra("type",1);
+                startActivity(intent3);
                 break;
 
             case R.id.btn_law:
-                // TODO: 2017/6/13 法律法规
+                // TODO: 2017/6/13 判断题
+                Intent intent4 = new Intent(MainActivity.this, AnswerActivity.class);
+                intent4.putExtra("type",2);
+                startActivity(intent4);
                 break;
 
             case R.id.btn_cheats:
-                // TODO: 2017/6/13 必过秘籍
+                // TODO: 2017/6/13 简答题
+                Intent intent5 = new Intent(MainActivity.this, AnswerActivity.class);
+                intent5.putExtra("type",3);
+                startActivity(intent5);
                 break;
 
             case R.id.btn_collection:
-                // TODO: 2017/6/13 收藏夹
+                // TODO: 2017/6/13 关于
+                Intent intent6 = new Intent(MainActivity.this, AboutActivity.class);
+                startActivity(intent6);
                 break;
 
             default:

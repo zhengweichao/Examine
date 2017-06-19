@@ -1,8 +1,7 @@
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:orientation="vertical" >
+    android:orientation="vertical">
 
     <TextView
         android:id="@+id/_tv_title"
@@ -18,14 +17,14 @@
         android:id="@+id/_rg_base"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginLeft="20dp" >
+        android:layout_marginLeft="20dp">
 
         <RadioButton
             android:id="@+id/_rb_option_a"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginTop="5dp"
-            android:text="选项"
+            android:text="选项A"
             android:textSize="18sp" />
 
         <RadioButton
@@ -33,7 +32,7 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginTop="5dp"
-            android:text="选项"
+            android:text="选项B"
             android:textSize="18sp" />
 
         <RadioButton
@@ -41,7 +40,7 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginTop="5dp"
-            android:text="选项"
+            android:text="选项C"
             android:textSize="18sp" />
 
         <RadioButton
@@ -49,9 +48,26 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginTop="5dp"
-            android:text="选项"
+            android:text="选项D"
             android:textSize="18sp" />
     </RadioGroup>
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+
+        <EditText
+            android:visibility="invisible"
+            android:id="@+id/et_answer"
+            android:layout_width="346dp"
+            android:layout_height="56dp"
+            android:lines="4"
+            android:padding="5dp"
+            android:hint="请输入答案"
+            android:layout_alignParentTop="true"
+            android:layout_centerHorizontal="true"
+            android:layout_marginTop="23dp" />
+    </RelativeLayout>
 
     <ImageView
         android:id="@+id/_iv_picture"
@@ -66,8 +82,7 @@
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="0dp"
-        android:layout_weight="1" >
-    </LinearLayout>
+        android:layout_weight="1"></LinearLayout>
 
 
 </LinearLayout>
