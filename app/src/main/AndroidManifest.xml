@@ -41,7 +41,8 @@
             android:theme="@style/AppTheme.Dark" />
         <activity android:name=".activity.AnswerActivity" />
         <activity android:name=".activity.GradeActivity" />
-        <activity android:name=".activity.AboutActivity"></activity>
+        <activity android:name=".activity.AboutActivity" />
+        <activity android:name=".activity.TestSettingActivity"></activity>
     </application>
 
 </manifest>

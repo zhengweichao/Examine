@@ -2,7 +2,7 @@ package top.vchao.examine.utils;
 
 import android.util.Log;
 
-import top.vchao.examine.Config;
+import top.vchao.examine.constants.Config;
 
 
 /**

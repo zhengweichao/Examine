@@ -1,4 +1,4 @@
-package top.vchao.examine;
+package top.vchao.examine.constants;
 
 /**
  * @ 创建时间: 2017/6/16 on 12:56.

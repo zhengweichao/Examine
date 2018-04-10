@@ -15,7 +15,7 @@ import butterknife.BindView;
 import butterknife.OnClick;
 import okhttp3.Call;
 import okhttp3.Response;
-import top.vchao.examine.Config;
+import top.vchao.examine.constants.Config;
 import top.vchao.examine.R;
 import top.vchao.examine.bean.JsonSignupBean;
 import top.vchao.examine.utils.LogUtils;

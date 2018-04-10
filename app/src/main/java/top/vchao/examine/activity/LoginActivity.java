@@ -15,10 +15,12 @@ import butterknife.BindView;
 import butterknife.OnClick;
 import okhttp3.Call;
 import okhttp3.Response;
-import top.vchao.examine.Config;
 import top.vchao.examine.R;
 import top.vchao.examine.bean.JsonLoginBean;
+import top.vchao.examine.constants.Config;
+import top.vchao.examine.constants.SPkey;
 import top.vchao.examine.utils.LogUtils;
+import top.vchao.examine.utils.SPUtils;
 
 /**
  * @ 创建时间: 2017/6/13 on 16:03.
@@ -60,6 +62,8 @@ public class LoginActivity extends BaseActivity {
         //获取输入内容
         String username = inputUsername.getText().toString().trim();
         String password = inputPassword.getText().toString().trim();
+        SPUtils.put(LoginActivity.this, SPkey.UserName, username);
+
         //联网，获取数据
         OkGo.get(Config.URL_LOGIN)
                 .params("username", username)
