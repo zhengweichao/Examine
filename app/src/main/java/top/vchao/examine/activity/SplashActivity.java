@@ -2,9 +2,6 @@ package top.vchao.examine.activity;
 
 import android.content.Intent;
 import android.os.Handler;
-import android.support.v7.app.AppCompatActivity;
-import android.os.Bundle;
-import android.view.View;
 
 import top.vchao.examine.R;
 
@@ -20,6 +17,7 @@ public class SplashActivity extends BaseActivity {
     int getLayoutId() {
         return R.layout.activity_splash;
     }
+
     @Override
     void initData() {
         //延时2s，跳转。

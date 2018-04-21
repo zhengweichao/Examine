@@ -15,16 +15,6 @@
             android:layout_height="40dp"
             android:src="@drawable/logo"/>
 
-        <TextView
-            android:id="@+id/textView"
-            android:layout_width="0dp"
-            android:layout_height="wrap_content"
-            android:layout_weight="1"
-            android:textSize="20sp"
-            android:layout_marginLeft="15dp"
-            android:layout_marginTop="12dp"
-            android:textColor="#fff"
-            android:text="0914140230  郑卫超"/>
     </LinearLayout>
 
     <LinearLayout
@@ -35,8 +25,7 @@
         android:orientation="vertical">
 
         <Button
-            android:visibility="invisible"
-            android:id="@+id/btn_sxlx"
+            android:id="@+id/btn_test1"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_gravity="center_horizontal"
@@ -45,7 +34,8 @@
             android:drawableTop="@mipmap/ic_main_sxlx"
             android:text="顺序练习"
             android:textColor="#ffffff"
-            android:textSize="14sp" />
+            android:textSize="14sp"
+            android:visibility="invisible" />
 
         <LinearLayout
             android:layout_width="match_parent"
@@ -56,20 +46,21 @@
             android:orientation="horizontal">
 
             <Button
-            android:visibility="invisible"
-                android:id="@+id/btn_zjlx"
+                android:id="@+id/btn_test2"
                 android:layout_width="60dp"
                 android:layout_height="wrap_content"
-                android:layout_marginTop="5dp"
                 android:layout_marginRight="6dp"
+                android:layout_marginTop="5dp"
                 android:background="#00000000"
                 android:drawableTop="@mipmap/ic_main_zjlx"
                 android:gravity="center"
                 android:text="章节练习"
                 android:textColor="#ffffff"
-                android:textSize="14sp" />
+                android:textSize="14sp"
+                android:visibility="invisible" />
 
             <LinearLayout
+                android:id="@+id/ll_main_start_answer"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="5dp"
@@ -95,8 +86,7 @@
 
 
             <Button
-                android:visibility="invisible"
-                android:id="@+id/btn_sjlx"
+                android:id="@+id/btn_test3"
                 android:layout_width="60dp"
                 android:layout_height="wrap_content"
                 android:layout_marginLeft="2dp"
@@ -106,12 +96,12 @@
                 android:gravity="center"
                 android:text="随机练习"
                 android:textColor="#ffffffff"
-                android:textSize="14sp" />
+                android:textSize="14sp"
+                android:visibility="invisible" />
         </LinearLayout>
 
         <Button
-            android:visibility="invisible"
-            android:id="@+id/btn_ctjlb"
+            android:id="@+id/btn_test4"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_gravity="center_horizontal"
@@ -120,7 +110,8 @@
             android:drawableTop="@mipmap/ic_main_ctjlb"
             android:text="错题记录本"
             android:textColor="#ffffff"
-            android:textSize="14sp" />
+            android:textSize="14sp"
+            android:visibility="invisible" />
     </LinearLayout>
 
     <LinearLayout
@@ -134,7 +125,7 @@
         android:paddingTop="10dp" >
 
         <Button
-            android:id="@+id/btn_point"
+            android:id="@+id/btn_choose"
             android:layout_width="0dp"
             android:layout_height="match_parent"
             android:layout_weight="1"
@@ -147,7 +138,7 @@
             android:textSize="14sp" />
 
         <Button
-            android:id="@+id/btn_law"
+            android:id="@+id/btn_judge"
             android:layout_width="0dp"
             android:layout_height="match_parent"
             android:layout_weight="1"
@@ -159,7 +150,7 @@
             android:textSize="14sp" />
 
         <Button
-            android:id="@+id/btn_cheats"
+            android:id="@+id/btn_blanks"
             android:layout_width="0dp"
             android:layout_height="match_parent"
             android:layout_weight="1"
@@ -171,7 +162,7 @@
             android:textSize="14sp" />
 
         <Button
-            android:id="@+id/btn_collection"
+            android:id="@+id/btn_about"
             android:layout_width="0dp"
             android:layout_height="match_parent"
             android:layout_weight="1"

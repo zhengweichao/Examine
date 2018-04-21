@@ -1,9 +1,11 @@
 package top.vchao.examine.activity;
 
+import android.content.pm.ActivityInfo;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v4.app.FragmentActivity;
-import android.view.View;
+
+import butterknife.ButterKnife;
 
 /**
  * @ 创建时间: 2017/6/13 on 15:40.
@@ -11,21 +13,20 @@ import android.view.View;
  * @ 作者: 郑卫超 QQ: 2318723605
  */
 
-public abstract class BaseActivity extends FragmentActivity implements View.OnClickListener {
+public abstract class BaseActivity extends FragmentActivity {
 
     @Override
     protected final void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        //得到布局文件
+        //        强制竖屏
+        setRequestedOrientation(ActivityInfo.SCREEN_ORIENTATION_PORTRAIT);
+
         setContentView(getLayoutId());
+        ButterKnife.bind(this);
 
-        //初始化View
+        getPreIntent();
         initView();
-
-        //初始化界面数据
         initData();
-
-        //绑定监听器与适配器
         initListener();
     }
 
@@ -35,12 +36,17 @@ public abstract class BaseActivity extends FragmentActivity implements View.OnCl
     abstract int getLayoutId();
 
     /**
+     * 获取上一个页面传递来的 intent 数据
+     */
+    void getPreIntent() {
+    }
+
+    /**
      * 初始化View
      */
     void initView() {
     }
 
-    ;
 
     /**
      * 初始化界面数据
@@ -48,7 +54,6 @@ public abstract class BaseActivity extends FragmentActivity implements View.OnCl
     void initData() {
     }
 
-    ;
 
     /**
      * 绑定监听器与适配器
@@ -56,28 +61,4 @@ public abstract class BaseActivity extends FragmentActivity implements View.OnCl
     void initListener() {
     }
 
-    ;
-
-    /**
-     * 对统一的按钮进行统一处理
-     *
-     * @param v 点击的View
-     */
-    @Override
-    public void onClick(View v) {
-        switch (v.getId()) {
-            default:
-                processClick(v);
-                break;
-        }
-    }
-
-    /**
-     * 点击事件
-     *
-     * @param v 点击的View
-     */
-    void processClick(View v) {
-    }
-    ;
 }

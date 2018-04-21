@@ -4,15 +4,11 @@ import android.app.Application;
 import android.database.sqlite.SQLiteDatabase;
 import android.util.Log;
 
-
 import com.lzy.okgo.OkGo;
-
-import java.util.List;
 
 import top.vchao.examine.bean.DaoMaster;
 import top.vchao.examine.bean.DaoSession;
-import top.vchao.examine.bean.QuestBean;
-import top.vchao.examine.bean.QuestBeanDao;
+import top.vchao.examine.utils.LogUtils;
 
 /**
  * @ 创建时间: 2017/6/10 on 17:36.
@@ -22,22 +18,28 @@ import top.vchao.examine.bean.QuestBeanDao;
 
 public class MyApplication extends Application {
     private static DaoSession daoSession;
+    private static MyApplication instance;
 
     @Override
     public void onCreate() {
         super.onCreate();
+        instance = this;
         //必须调用初始化
         OkGo.init(this);
 
         //配置数据库
         setupDatabase();
-        Log.i("zwc", "onCreate: ++++++");
+    }
+
+    public static MyApplication getInstance() {
+        return instance;
     }
 
     /**
      * 配置数据库
      */
     private void setupDatabase() {
+        LogUtils.e("onCreate: 配置数据库 ");
         //创建数据库shop.db"
         DaoMaster.DevOpenHelper helper = new DaoMaster.DevOpenHelper(this, "shop.db", null);
         //获取可写数据库

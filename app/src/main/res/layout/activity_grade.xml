@@ -1,13 +1,11 @@
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:orientation="vertical"
     android:background="@mipmap/ic_bg_main"
-    >
+    android:orientation="vertical">
 
     <TextView
-        android:id="@+id/tv_activity_score_score"
+        android:id="@+id/tv_grade_score"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_gravity="center_horizontal"
@@ -15,14 +13,12 @@
         android:textSize="24sp" />
 
     <ListView
+        android:id="@+id/lv_grade_score_detail"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
+        android:layout_marginBottom="35dp"
         android:layout_marginLeft="25dp"
         android:layout_marginRight="25dp"
-        android:layout_marginTop="10dp"
-        android:layout_marginBottom="35dp"
-        android:id="@+id/lv_activity_score_detail">
-
-    </ListView>
+        android:layout_marginTop="10dp" />
 
 </LinearLayout>

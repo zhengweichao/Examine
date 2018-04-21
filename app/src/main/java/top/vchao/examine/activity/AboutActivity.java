@@ -1,8 +1,5 @@
 package top.vchao.examine.activity;
 
-import android.support.v7.app.AppCompatActivity;
-import android.os.Bundle;
-
 import top.vchao.examine.R;
 
 

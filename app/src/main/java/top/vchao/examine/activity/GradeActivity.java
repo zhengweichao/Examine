@@ -5,14 +5,13 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.BaseAdapter;
-import android.widget.ImageView;
 import android.widget.ListView;
 import android.widget.TextView;
 
-import top.vchao.examine.R;
-
 import java.util.ArrayList;
 
+import butterknife.BindView;
+import top.vchao.examine.R;
 import top.vchao.examine.bean.QuestBean;
 import top.vchao.examine.db.LoveDao;
 
@@ -23,9 +22,13 @@ import top.vchao.examine.db.LoveDao;
  */
 public class GradeActivity extends BaseActivity {
 
-    private ListView lvScore;
-    private TextView tvScore;
+    @BindView(R.id.tv_grade_score)
+    TextView tvGradeScore;
+    @BindView(R.id.lv_grade_score_detail)
+    ListView lvGradeScoreDetail;
+
     private ArrayList<CharSequence> timu;
+    private String grade;
 
     @Override
     int getLayoutId() {
@@ -33,20 +36,18 @@ public class GradeActivity extends BaseActivity {
     }
 
     @Override
-    void initView() {
-        lvScore = (ListView) findViewById(R.id.lv_activity_score_detail);
-        tvScore = (TextView) findViewById(R.id.tv_activity_score_score);
+    void getPreIntent() {
+//        接收传递来的数据
+        timu = getIntent().getCharSequenceArrayListExtra("timu");
+        grade = getIntent().getExtras().get("grade").toString().trim();
     }
 
     @Override
     void initData() {
-//        接收传递来的数据
-        timu = getIntent().getCharSequenceArrayListExtra("timu");
-        String grade = getIntent().getExtras().get("grade").toString().trim();
 //        设置显示成绩分数
-        tvScore.setText("您的成绩是： " + grade);
+        tvGradeScore.setText("您的成绩是： " + grade);
 //        设置适配器
-        lvScore.setAdapter(new MyAdapter());
+        lvGradeScoreDetail.setAdapter(new MyAdapter());
     }
 
     /**
