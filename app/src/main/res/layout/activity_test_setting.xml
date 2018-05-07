@@ -1,9 +1,74 @@
 <?xml version="1.0" encoding="utf-8"?>
-<android.support.constraint.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:orientation="vertical"
+    android:padding="16dp"
     tools:context="top.vchao.examine.activity.TestSettingActivity">
 
-</android.support.constraint.ConstraintLayout>
+
+    <TextView
+        android:id="@+id/textView"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="请选择试卷类型" />
+
+    <RadioGroup
+        android:id="@+id/rg_test_type"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal">
+
+        <RadioButton
+            android:id="@+id/rbtn_enlish"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="英语卷" />
+
+        <RadioButton
+            android:id="@+id/rbtn_math"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="数学卷" />
+
+        <RadioButton
+            android:id="@+id/rbtn_chinise"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="语文卷" />
+
+    </RadioGroup>
+
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="20dp"
+        android:text="请选择题目数量" />
+
+    <RadioGroup
+        android:id="@+id/rg_test_num"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal">
+
+        <RadioButton
+            android:id="@+id/rbtn_num_5"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="5道" />
+
+        <RadioButton
+            android:id="@+id/rbtn_num_10"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="10道" />
+
+    </RadioGroup>
+
+    <Button
+        android:id="@+id/btn_start_test"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="开始考试" />
+</LinearLayout>

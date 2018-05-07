@@ -42,7 +42,9 @@
         <activity android:name=".activity.AnswerActivity" />
         <activity android:name=".activity.GradeActivity" />
         <activity android:name=".activity.AboutActivity" />
-        <activity android:name=".activity.TestSettingActivity"></activity>
+        <activity android:name=".activity.TestSettingActivity" />
+        <activity android:name=".activity.TestAnswerActivity" />
+        <activity android:name=".activity.TestGradeActivity"></activity>
     </application>
 
 </manifest>

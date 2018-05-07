@@ -5,7 +5,6 @@ import android.content.Intent;
 import android.support.v7.widget.AppCompatButton;
 import android.view.View;
 import android.widget.EditText;
-import android.widget.Toast;
 
 import com.google.gson.Gson;
 import com.lzy.okgo.OkGo;
@@ -20,6 +19,7 @@ import top.vchao.examine.bean.JsonLoginBean;
 import top.vchao.examine.constants.Config;
 import top.vchao.examine.constants.SPkey;
 import top.vchao.examine.utils.LogUtils;
+import top.vchao.examine.utils.ToastUtils;
 import top.vchao.examine.utils.SPUtils;
 
 /**
@@ -119,7 +119,7 @@ public class LoginActivity extends BaseActivity {
      * 登录失败
      */
     public void onLoginFailed() {
-        Toast.makeText(getBaseContext(), "登陆失败", Toast.LENGTH_LONG).show();
+        ToastUtils.showShort("登陆失败");
         btnLogin.setEnabled(true);
     }
 

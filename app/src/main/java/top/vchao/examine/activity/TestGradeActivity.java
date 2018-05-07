@@ -8,31 +8,55 @@ import android.widget.BaseAdapter;
 import android.widget.ListView;
 import android.widget.TextView;
 
+import com.google.gson.Gson;
+import com.lzy.okgo.OkGo;
+import com.lzy.okgo.callback.StringCallback;
+
 import java.util.ArrayList;
 
 import butterknife.BindView;
+import okhttp3.Call;
+import okhttp3.Response;
 import top.vchao.examine.R;
 import top.vchao.examine.bean.QuestBean;
+import top.vchao.examine.bean.UpGradeBean;
+import top.vchao.examine.constants.Config;
+import top.vchao.examine.constants.SPkey;
 import top.vchao.examine.db.LoveDao;
+import top.vchao.examine.utils.LogUtils;
+import top.vchao.examine.utils.SPUtils;
+import top.vchao.examine.utils.TimeUtils;
+import top.vchao.examine.utils.ToastUtils;
 
-/**
- * @ 创建时间: 2017/6/14 on 09:46.
- * @ 描述：分数界面
- * @ 作者: 郑卫超 QQ: 2318723605
- */
-public class GradeActivity extends BaseActivity {
+public class TestGradeActivity extends BaseActivity {
 
-    @BindView(R.id.tv_grade_score)
-    TextView tvGradeScore;
+
+    @BindView(R.id.tv_test_grade_name)
+    TextView tvTestGradeName;
+    @BindView(R.id.tv_test_grade_score)
+    TextView tvTestGradeScore;
+    @BindView(R.id.tv_test_grade_kind)
+    TextView tvTestGradeKind;
+    @BindView(R.id.tv_test_grade_use_time)
+    TextView tvTestGradeUseTime;
     @BindView(R.id.lv_grade_score_detail)
     ListView lvGradeScoreDetail;
-
+    @BindView(R.id.tv_test_grade_num)
+    TextView tvTestGradeNum;
+    @BindView(R.id.tv_test_grade_end_time)
+    TextView tvTestGradeEndTime;
     private ArrayList<CharSequence> titleName;
     private String grade;
+    private String time;
+    private String kind;
+    private String num;
+    private String end_time;
+    private String username;
+
 
     @Override
     int getLayoutId() {
-        return R.layout.activity_grade;
+        return R.layout.activity_test_grade;
     }
 
     @Override
@@ -40,14 +64,63 @@ public class GradeActivity extends BaseActivity {
 //        接收传递来的数据
         titleName = getIntent().getCharSequenceArrayListExtra("timu");
         grade = getIntent().getStringExtra("grade");
+        time = getIntent().getStringExtra("time");
+        kind = getIntent().getStringExtra("kind");
+        num = getIntent().getStringExtra("num");
+        end_time = TimeUtils.getNowTime();
+        username = (String) SPUtils.get(TestGradeActivity.this, SPkey.UserName, "");
+    }
+
+    @Override
+    void initView() {
+//        设置显示成绩分数
+        tvTestGradeName.setText(username + " 您的本次得分是：");
+        tvTestGradeScore.setText(grade + "分");
+        tvTestGradeUseTime.setText("使用时间：" + time);
+        tvTestGradeNum.setText("题目数量：" + num);
+        tvTestGradeEndTime.setText("交卷时间：" + end_time);
+        switch (kind) {
+            case Config.TestType_Chinese:
+                tvTestGradeKind.setText("试卷类型：语文卷");
+                break;
+            case Config.TestType_English:
+                tvTestGradeKind.setText("试卷类型：英语卷");
+                break;
+            case Config.TestType_Math:
+                tvTestGradeKind.setText("试卷类型：数学卷");
+                break;
+            default:
+                tvTestGradeKind.setVisibility(View.GONE);
+                break;
+        }
+//        设置适配器
+        lvGradeScoreDetail.setAdapter(new MyAdapter());
     }
 
     @Override
     void initData() {
-//        设置显示成绩分数
-        tvGradeScore.setText("您的成绩是： " + grade);
-//        设置适配器
-        lvGradeScoreDetail.setAdapter(new MyAdapter());
+//        上传成绩
+//        http://localhost:8080/Examine1/UpUserGrade?username=张三&grade=88&usetime=10&endtime=111&kind=math&number=5
+        OkGo.get(Config.URL_UP_USER_GRADE)
+                .params("username", username)
+                .params("grade", grade)
+                .params("usetime", time)
+                .params("endtime", end_time)
+                .params("kind", kind)
+                .params("number", num)
+                .execute(new StringCallback() {
+                    @Override
+                    public void onSuccess(String s, Call call, Response response) {
+                        LogUtils.e(" 上传答题信息 " + s);
+                        Gson gson = new Gson();
+                        UpGradeBean upGradeBean = gson.fromJson(s, UpGradeBean.class);
+                        if (upGradeBean.getCode().equals("200")) {
+                            ToastUtils.showShort("成绩上传成功！");
+                        } else {
+                            ToastUtils.showShort("" + upGradeBean.getStatus());
+                        }
+                    }
+                });
     }
 
     /**
@@ -76,7 +149,7 @@ public class GradeActivity extends BaseActivity {
             ViewHolder holder;
             if (convertView == null) {
                 holder = new ViewHolder();
-                convertView = LayoutInflater.from(GradeActivity.this).inflate(R.layout.list_item_activity_score, null);
+                convertView = LayoutInflater.from(TestGradeActivity.this).inflate(R.layout.list_item_activity_score, null);
                 holder.tvTitle = (TextView) convertView.findViewById(R.id.tv_item_activty_score_title);
                 holder.tvOptionA = (TextView) convertView.findViewById(R.id.tv_item_activty_score_optionA);
                 holder.tvOptionB = (TextView) convertView.findViewById(R.id.tv_item_activty_score_optionB);

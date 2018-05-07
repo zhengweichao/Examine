@@ -18,8 +18,7 @@ public class MainActivity extends BaseActivity {
         switch (view.getId()) {
             case R.id.ll_main_start_answer:
                 //   开始答题  跳转回答页面 （默认进入选择题回答）
-                Intent intent1 = new Intent(MainActivity.this, AnswerActivity.class);
-                intent1.putExtra("type", 1);
+                Intent intent1 = new Intent(MainActivity.this, TestSettingActivity.class);
                 startActivity(intent1);
                 break;
             case R.id.btn_choose:

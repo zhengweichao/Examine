@@ -32,11 +32,9 @@ import top.vchao.examine.utils.LogUtils;
 import top.vchao.examine.utils.ToastUtils;
 
 /**
- * @ 创建时间: 2017/6/13 on 17:08.
- * @ 描述：回答界面
- * @ 作者: 郑卫超 QQ: 2318723605
+ * 试卷答题 页面
  */
-public class AnswerActivity extends BaseActivity implements Chronometer.OnChronometerTickListener {
+public class TestAnswerActivity extends BaseActivity implements Chronometer.OnChronometerTickListener {
 
     @BindView(R.id.vp_answer)
     ViewPager vp_answer;
@@ -47,27 +45,29 @@ public class AnswerActivity extends BaseActivity implements Chronometer.OnChrono
     private int minute = 0;
     private int second = 0;
     private AlertDialog.Builder builder;
-    private ArrayList<String> a;
+    private ArrayList<String> titleName;
     private int nowpager = 0;
     private List<QuestBean> messages;
-    private String type;
+    private String kind;
+    private String num;
 
     @Override
     int getLayoutId() {
-        return R.layout.activity_answer;
+        return R.layout.activity_test_answer;
     }
 
     @Override
     void getPreIntent() {
 //        获取传递来的变量
-        type = getIntent().getExtras().get("type").toString().trim();
+        kind = getIntent().getStringExtra("kind");
+        num = getIntent().getStringExtra("num");
     }
 
     @Override
     void initView() {
 
 //      联网获取数据
-        initNet(type);
+        initNet();
 
         vp_answer.setOnPageChangeListener(new MyOnPageChangeListener());
         setChronometer();
@@ -111,21 +111,20 @@ public class AnswerActivity extends BaseActivity implements Chronometer.OnChrono
 
     /**
      * 初始化网络连接
-     *
-     * @param type
      */
-    private void initNet(String type) {
-        a = new ArrayList<>();
+    private void initNet() {
+        titleName = new ArrayList<>();
         fragmentlists = new ArrayList<>();
         LogUtils.e("initNet: 开始联网…………");
         //进度条对话框
-        final ProgressDialog progressDialog = new ProgressDialog(AnswerActivity.this, R.style.AppTheme_Dark_Dialog);
+        final ProgressDialog progressDialog = new ProgressDialog(TestAnswerActivity.this, R.style.AppTheme_Dark_Dialog);
         progressDialog.setIndeterminate(true);
         progressDialog.setMessage("获取题目中...");
         progressDialog.show();
 //        联网
-        OkGo.get(Config.URL_GET_QUESTION)
-                .params("type", type)
+        OkGo.get(Config.URL_GET_TEST_QUESTION)
+                .params("kind", kind)
+                .params("number", num)
                 .execute(new StringCallback() {
                     @Override
                     public void onSuccess(String s, Call call, Response response) {
@@ -139,7 +138,7 @@ public class AnswerActivity extends BaseActivity implements Chronometer.OnChrono
                             questBeanQ.setId(i);
                             fragmentlists.add(new AnswerFragment(questBeanQ));
                             LoveDao.insertLove(questBeanQ);
-                            a.add(questBeanQ.getId() + "");
+                            titleName.add(questBeanQ.getId() + "");
                             LogUtils.e(i + "   onSuccess    : " + questBeanQ.getId() + questBeanQ.getTitle());
                         }
 //                        设置适配器
@@ -170,11 +169,6 @@ public class AnswerActivity extends BaseActivity implements Chronometer.OnChrono
                 break;
 //            点击提交按钮
             case R.id._btn_submit:
-//                简答题不进行提交评分
-                if (type.equals("3")) {
-                    ToastUtils.showShort("简答题目前暂不支持评分");
-                    return;
-                }
 //                否则初始化并展示提交对话框
                 initAlertDialog();
                 builder.show();
@@ -219,7 +213,7 @@ public class AnswerActivity extends BaseActivity implements Chronometer.OnChrono
     // 弹出是否确认交卷的对话框
     private void initAlertDialog() {
         //新建对话框
-        builder = new AlertDialog.Builder(AnswerActivity.this);
+        builder = new AlertDialog.Builder(TestAnswerActivity.this);
         builder.setTitle("提示");
         builder.setMessage("是否确定交卷?");
         builder.setPositiveButton("确定", new DialogInterface.OnClickListener() {
@@ -228,31 +222,26 @@ public class AnswerActivity extends BaseActivity implements Chronometer.OnChrono
 //                计算分数
                 int grade = 0;
 //                判断题
-                if (type.equals("2")) {
-                    for (int i = 0; i < messages.size(); i++) {
+                for (int i = 0; i < messages.size(); i++) {
 //                        查询
-                        QuestBean questBeenA = LoveDao.queryLove(Integer.parseInt(a.get(i)));
+                    QuestBean questBeenA = LoveDao.queryLove(Integer.parseInt(titleName.get(i)));
 //                        判断
-                        if (questBeenA.getAnswer().equals("对") && questBeenA.getMyanswer().equals("A") || questBeenA.getAnswer().equals("错") && questBeenA.getMyanswer().equals("B")) {
-                            grade += 20;
-                        }
+                    if (questBeenA.getAnswer().equals(questBeenA.getMyanswer())) {
+                        grade += 100 / (Integer.parseInt(num));
+                    } else if (questBeenA.getAnswer().equals("对") && questBeenA.getMyanswer().equals("A") || questBeenA.getAnswer().equals("错") && questBeenA.getMyanswer().equals("B")) {
+                        grade += 100 / (Integer.parseInt(num));
                     }
                 }
-//                选择题
-                else {
-                    for (int i = 0; i < messages.size(); i++) {
-                        QuestBean questBeenA = LoveDao.queryLove(Integer.parseInt(a.get(i)));
-                        if (questBeenA.getAnswer().equals(questBeenA.getMyanswer())) {
-                            grade += 20;
-                        }
-                    }
-                }
+                LogUtils.e("经过计算后，该试卷得分为" + grade);
 
 //                传递分数
-                Intent intent = new Intent(AnswerActivity.this, GradeActivity.class);
+                Intent intent = new Intent(TestAnswerActivity.this, TestGradeActivity.class);
                 intent.putExtra("grade", "" + grade);
 //                传递题目列表
-                intent.putStringArrayListExtra("timu", a);
+                intent.putStringArrayListExtra("timu", titleName);
+                intent.putExtra("time", nowtime());
+                intent.putExtra("kind", kind);
+                intent.putExtra("num", num);
                 startActivity(intent);
                 finish();
             }

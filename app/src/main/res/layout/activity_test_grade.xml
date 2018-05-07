@@ -1,0 +1,88 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@mipmap/ic_bg_main"
+    android:orientation="vertical"
+    tools:context="top.vchao.examine.activity.TestGradeActivity">
+
+    <TextView
+        android:id="@+id/tv_test_grade_name"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="16dp"
+        android:layout_marginTop="10dp"
+        android:text=" XXX，您的本次得分是："
+        android:textColor="#ffffff"
+        android:textSize="20sp" />
+
+    <ScrollView
+        android:layout_marginBottom="30dp"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+
+
+        <!--android:layout_marginTop="35dp"-->
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_marginLeft="16dp"
+            android:layout_marginRight="16dp"
+            android:orientation="vertical">
+
+
+            <TextView
+                android:id="@+id/tv_test_grade_score"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center_horizontal"
+                android:text="XX"
+                android:textColor="@color/black"
+                android:textSize="26sp" />
+
+            <TextView
+                android:id="@+id/tv_test_grade_kind"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="试卷类型："
+                android:textSize="16sp" />
+
+            <TextView
+                android:id="@+id/tv_test_grade_num"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+
+                android:text="题目数量："
+                android:textSize="16sp" />
+
+            <TextView
+                android:id="@+id/tv_test_grade_end_time"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+
+                android:text="交卷时间："
+                android:textSize="16sp" />
+
+            <TextView
+                android:id="@+id/tv_test_grade_use_time"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+
+                android:text="使用时间："
+                android:textSize="16sp" />
+
+            <ListView
+                android:id="@+id/lv_grade_score_detail"
+                android:layout_width="match_parent"
+                android:layout_height="400dp"
+                android:layout_marginLeft="0dp"
+                android:layout_marginRight="0dp"
+                android:layout_marginTop="10dp"
+                android:overScrollMode="never"
+                android:scrollbars="none" />
+
+        </LinearLayout>
+
+    </ScrollView>
+</LinearLayout>
